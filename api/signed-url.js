@@ -12,8 +12,9 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // Return in expected camelCase format:
-    return res.status(200).json({ signedUrl: data.signed_url });
+    return res.status(200).json({
+      signedUrl: data.signed_url,
+    });
   } catch (err) {
     console.error("Server error:", err);
     res.status(500).json({ error: "Server error" });
