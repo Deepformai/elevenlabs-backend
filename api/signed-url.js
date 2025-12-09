@@ -10,17 +10,10 @@ export default async function handler(req, res) {
       }
     );
 
-    if (!response.ok) {
-      const text = await response.text();
-      console.error("ElevenLabs error:", text);
-      return res.status(500).json({ error: "Failed to get signed URL" });
-    }
-
     const data = await response.json();
 
-// TEMP DEBUG: show full response so we know what ElevenLabs is returning
-return res.status(200).json(data);
-
+    // Return in expected camelCase format:
+    return res.status(200).json({ signedUrl: data.signed_url });
   } catch (err) {
     console.error("Server error:", err);
     res.status(500).json({ error: "Server error" });
